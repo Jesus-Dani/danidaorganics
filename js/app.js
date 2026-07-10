@@ -545,6 +545,7 @@
         <button type="button" class="btn btn-accent btn-block" id="add-to-cart-btn" ${!product.inStock || !isSelectionComplete(product) ? "disabled" : ""}>
           Add to cart${priceLabel ? " — " + priceLabel : ""}
         </button>
+        <button type="button" class="btn btn-text btn-block" id="continue-shopping-btn">← Continue shopping</button>
       </div>
       <div class="sr-only" aria-live="polite" id="qv-live-region"></div>
     `;
@@ -640,6 +641,13 @@
 
     const addBtn = body.querySelector("#add-to-cart-btn");
     if (addBtn) addBtn.addEventListener("click", () => addCurrentSelectionToCart(product));
+
+    const continueBtn = body.querySelector("#continue-shopping-btn");
+    if (continueBtn) {
+      continueBtn.addEventListener("click", () => {
+        if (window.DanidaRouter) window.DanidaRouter.closeProduct();
+      });
+    }
   }
 
   function addCurrentSelectionToCart(product) {
@@ -804,6 +812,7 @@
 
     document.getElementById("cart-toggle").addEventListener("click", openCart);
     document.querySelectorAll("[data-close-cart]").forEach((el) => el.addEventListener("click", closeCart));
+    document.getElementById("cart-continue-shopping-btn").addEventListener("click", closeCart);
     document.getElementById("whatsapp-checkout-btn").addEventListener("click", () => {
       if (state.cart.length === 0) return;
       window.open(buildWhatsAppUrl(), "_blank", "noopener");
