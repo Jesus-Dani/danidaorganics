@@ -549,6 +549,7 @@
       <div class="sr-only" aria-live="polite" id="qv-live-region"></div>
     `;
 
+    initLazyImages(body);
     wireQuickViewEvents(product, gallery);
   }
 
