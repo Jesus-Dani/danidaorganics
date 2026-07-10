@@ -245,7 +245,7 @@ section { padding: 48px 0; }
 
 .hero {
   background: var(--bg-alt);
-  padding: 56px 0 0;
+  padding: 0;
 }
 
 .hero-media {
