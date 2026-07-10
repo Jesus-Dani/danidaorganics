@@ -888,6 +888,50 @@
 
     const waLink = document.getElementById("footer-whatsapp-link");
     waLink.href = `https://wa.me/${config.whatsapp.number}`;
+    const contactWaLink = document.getElementById("contact-whatsapp-link");
+    if (contactWaLink) contactWaLink.href = `https://wa.me/${config.whatsapp.number}`;
+
+    wireMainMenu();
+  }
+
+  function wireMainMenu() {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("main-menu");
+    if (!toggle || !menu) return;
+
+    function openMenu() {
+      menu.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu() {
+      menu.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (menu.hidden) openMenu();
+      else closeMenu();
+    });
+
+    menu.querySelectorAll("[data-menu-link]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menu.hidden && !menu.contains(e.target) && e.target !== toggle) closeMenu();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !menu.hidden) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
   }
 
   function openFilterSheet() {

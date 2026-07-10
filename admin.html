@@ -50,12 +50,14 @@
     <div id="save-status" role="status" aria-live="polite" style="min-height:20px;font-size:13px;color:var(--ink-muted);"></div>
 
     <section id="panel-products" data-panel="products">
-      <table class="admin-table" id="products-table">
-        <thead>
-          <tr><th>Order</th><th>Name</th><th>Categories</th><th>From</th><th>Stock</th><th>Actions</th></tr>
-        </thead>
-        <tbody id="products-tbody"></tbody>
-      </table>
+      <div class="table-scroll">
+        <table class="admin-table" id="products-table">
+          <thead>
+            <tr><th>Order</th><th>Name</th><th>Categories</th><th>From</th><th>Stock</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+      </div>
     </section>
 
     <section id="panel-categories" data-panel="categories" hidden>
@@ -66,10 +68,12 @@
         </div>
         <button type="button" class="btn btn-accent" id="add-category-btn">Add</button>
       </div>
-      <table class="admin-table" id="categories-table">
-        <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
-        <tbody id="categories-tbody"></tbody>
-      </table>
+      <div class="table-scroll">
+        <table class="admin-table" id="categories-table">
+          <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
+          <tbody id="categories-tbody"></tbody>
+        </table>
+      </div>
     </section>
 
     <section id="panel-goals" data-panel="goals" hidden>
@@ -80,10 +84,12 @@
         </div>
         <button type="button" class="btn btn-accent" id="add-goal-btn">Add</button>
       </div>
-      <table class="admin-table" id="goals-table">
-        <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
-        <tbody id="goals-tbody"></tbody>
-      </table>
+      <div class="table-scroll">
+        <table class="admin-table" id="goals-table">
+          <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
+          <tbody id="goals-tbody"></tbody>
+        </table>
+      </div>
     </section>
 
     <p class="admin-footer-note" id="catalogue-size-indicator"></p>

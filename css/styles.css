@@ -219,6 +219,33 @@ section { padding: 48px 0; }
   gap: 4px;
 }
 
+.menu-wrap { position: relative; }
+
+.main-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(38,42,32,0.12);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 50;
+}
+.main-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-size: var(--fs-14);
+  font-weight: 500;
+  color: var(--ink);
+}
+.main-menu a:hover { background: var(--bg-alt); }
+
 .cart-badge-wrap { position: relative; }
 
 .cart-count {
@@ -796,6 +823,23 @@ img:not(.blur-up) {
 }
 
 /* ==========================================================================
+   About Us
+   ========================================================================== */
+
+.about-us {
+  background: var(--bg-alt);
+}
+.about-us-inner {
+  max-width: 68ch;
+}
+.about-us p {
+  color: var(--ink-muted);
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+.about-us p:last-child { margin-bottom: 0; }
+
+/* ==========================================================================
    Testimonials
    ========================================================================== */
 
@@ -864,6 +908,26 @@ img:not(.blur-up) {
 }
 .freshness-item h3 { font-size: var(--fs-17); margin-bottom: 6px; }
 .freshness-item p { color: var(--ink-muted); }
+
+/* ==========================================================================
+   Contact Us
+   ========================================================================== */
+
+.contact-intro {
+  color: var(--ink-muted);
+  max-width: 60ch;
+  margin-bottom: 20px;
+}
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.contact-note {
+  color: var(--ink-faint);
+  font-size: var(--fs-12);
+}
 
 /* ==========================================================================
    Footer
@@ -1040,13 +1104,19 @@ img:not(.blur-up) {
   padding: 8px 0;
 }
 
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+}
+
 .admin-table {
   width: 100%;
+  min-width: 560px;
   border-collapse: collapse;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  overflow: hidden;
 }
 .admin-table th, .admin-table td {
   text-align: left;
