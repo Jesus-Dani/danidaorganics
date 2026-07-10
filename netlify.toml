@@ -1,0 +1,28 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# /products/* is routed through the product-meta function for every request;
+# the function itself decides whether to serve bot-only meta HTML or pass
+# through to the normal static app shell for real visitors.
+[[redirects]]
+  from = "/products/*"
+  to = "/.netlify/functions/product-meta"
+  status = 200
+
+# SPA catch-all so any other deep link served directly by Netlify still
+# boots the app shell (client-side routing takes over from there).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"

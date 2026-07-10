@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danida Organics — Herbal Apothecary</title>
+<meta name="description" content="A curated herbal apothecary: Ayurvedic, Chinese and Western herbs, culinary spices, teas, roots, barks, seeds and more. Order on WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Danida Organics">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://res.cloudinary.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<a href="#main" class="sr-only">Skip to content</a>
+
+<!-- ================= Header ================= -->
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="wordmark" data-nav-home>Danida Organics</a>
+    <div class="header-actions">
+      <button class="btn-icon" id="search-toggle" aria-label="Search products">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="btn-icon cart-badge-wrap" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cart-count" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= Hero ================= -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-media">
+      <img src="/images/hero-poster.jpg" alt="A curated spread of dried herbs, roots and spices" width="1600" height="900" fetchpriority="high" onerror="this.style.display='none'">
+      <div class="hero-copy">
+        <h1 class="hero-tagline">Herbs, roots &amp; spices, curated with care</h1>
+        <a href="#finder" class="btn btn-accent">Shop now</a>
+      </div>
+    </div>
+    <div class="trust-strip">
+      <span>Quality-checked</span>
+      <span>Freshly packed</span>
+      <span>Wide variety</span>
+      <span>Trusted suppliers</span>
+    </div>
+  </section>
+
+  <!-- ================= Shop by category ================= -->
+  <section class="shop-by-category" aria-labelledby="sbc-title">
+    <div class="container">
+      <h2 class="section-title" id="sbc-title">Shop by category</h2>
+      <div class="category-cards" id="category-cards"></div>
+    </div>
+  </section>
+
+  <!-- ================= Find your product ================= -->
+  <section id="finder" aria-labelledby="finder-title">
+    <div class="container">
+      <h2 class="section-title" id="finder-title">Find your product</h2>
+
+      <div class="finder-row">
+        <div class="search-input-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <label class="sr-only" for="search-input">Search products</label>
+          <input type="text" id="search-input" class="search-input" placeholder="Search products" autocomplete="off">
+        </div>
+
+        <label class="sr-only" for="category-select">Category</label>
+        <select id="category-select" class="select-input">
+          <option value="">All categories</option>
+        </select>
+
+        <label class="sr-only" for="goal-select">Health goal</label>
+        <select id="goal-select" class="select-input">
+          <option value="">All health goals</option>
+        </select>
+
+        <button type="button" class="btn btn-outline filters-btn" id="filters-btn" aria-haspopup="dialog">
+          Filters
+          <span class="active-count-badge" id="active-count-badge" hidden>0</span>
+        </button>
+      </div>
+
+      <div class="active-filters" id="active-filters" aria-live="polite"></div>
+
+      <div class="product-grid" id="product-grid" aria-live="polite" aria-busy="true"></div>
+
+      <div class="load-more-wrap">
+        <button type="button" class="btn btn-outline" id="load-more-btn" hidden>Load more</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Testimonials ================= -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <h2 class="section-title" id="testimonials-title">What people are saying</h2>
+      <div class="testimonials-grid" id="testimonials-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+      <div id="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How should I store what I order?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">Most powders and cut herbs keep best in an airtight container, away from direct light and heat. Whole roots, barks and seeds generally last longer than powdered forms — grind or use powders sooner rather than later for the best flavour and potency.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Are these products food-grade or for wellness use?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">It varies by product — some items in our range are culinary (spices, teas), others are traditionally used for wellness (Ayurvedic, Chinese and Western herbs). Each product's description notes its traditional or common use. If you're unsure how a specific item is meant to be used, ask us on WhatsApp before ordering.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How does ordering on WhatsApp work?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">Add items to your cart, then tap "Order on WhatsApp." It opens a pre-filled message listing everything in your cart — form, weight, quantity and total — straight to our WhatsApp. We'll confirm availability, delivery and payment with you there.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do you deliver, and how much does it cost?
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">Yes — delivery is arranged directly over WhatsApp once we know your location, since cost depends on where you are. We'll confirm the delivery fee and timeline before your order is finalised.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Freshness, storage & delivery ================= -->
+  <section class="freshness" aria-labelledby="freshness-title">
+    <div class="container">
+      <h2 class="section-title" id="freshness-title">Freshness, storage &amp; delivery</h2>
+      <div class="freshness-grid">
+        <div class="freshness-item">
+          <h3>Powders &amp; ground spices</h3>
+          <p>Store airtight, away from light and heat, and use within a few months for the best flavour.</p>
+        </div>
+        <div class="freshness-item">
+          <h3>Whole roots, barks &amp; seeds</h3>
+          <p>Keep in a cool, dry place. Whole forms generally hold their potency longer than powdered ones.</p>
+        </div>
+        <div class="freshness-item">
+          <h3>Delivery</h3>
+          <p>Every order is confirmed and arranged over WhatsApp, with delivery cost and timing agreed before checkout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= Footer ================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://www.instagram.com/danidaorganics_herbs" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" id="footer-whatsapp-link" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <p class="wellness-disclaimer">
+      Product descriptions on this site are for general informational purposes only and are not medical advice.
+      These products are not intended to diagnose, treat, cure, or prevent any disease. Always consult a qualified
+      healthcare provider before using herbal products, especially if pregnant, nursing, or managing a health condition.
+    </p>
+  </div>
+</footer>
+
+<!-- ================= Filter sheet (mobile) ================= -->
+<div class="filter-sheet" id="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="filter-sheet-title">
+  <div class="scrim" data-close-filter-sheet></div>
+  <div class="filter-sheet-panel">
+    <div class="filter-sheet-header">
+      <h2 id="filter-sheet-title" style="font-size:17px;">Filters</h2>
+      <button class="btn-icon" data-close-filter-sheet aria-label="Close filters">✕</button>
+    </div>
+    <div class="field">
+      <label for="sheet-search-input">Search products</label>
+      <input type="text" id="sheet-search-input" class="search-input" placeholder="Search products" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="sheet-category-select">Category</label>
+      <select id="sheet-category-select" class="select-input"><option value="">All categories</option></select>
+    </div>
+    <div class="field">
+      <label for="sheet-goal-select">Health goal</label>
+      <select id="sheet-goal-select" class="select-input"><option value="">All health goals</option></select>
+    </div>
+    <button type="button" class="btn btn-accent btn-block" data-close-filter-sheet>Show results</button>
+  </div>
+</div>
+
+<!-- ================= Quick-view overlay ================= -->
+<div class="quickview-overlay" id="quickview-overlay" role="dialog" aria-modal="true" aria-labelledby="qv-name">
+  <div class="quickview-scrim" data-close-quickview></div>
+  <div class="quickview-panel">
+    <button id="quickview-close" class="btn-icon quickview-close" data-close-quickview aria-label="Close product details">✕</button>
+    <div class="quickview-body" id="quickview-body">
+      <!-- rendered by app.js -->
+    </div>
+  </div>
+</div>
+
+<!-- ================= Cart drawer ================= -->
+<div class="cart-overlay" id="cart-overlay" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="cart-scrim" data-close-cart></div>
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2 id="cart-title" style="font-size:17px;">Your cart</h2>
+      <button class="btn-icon" data-close-cart aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items" aria-live="polite"></div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">₦0</span>
+      </div>
+      <button type="button" class="btn btn-ink btn-block" id="whatsapp-checkout-btn" disabled>Order on WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/data/seed.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/router.js"></script>
+</body>
+</html>

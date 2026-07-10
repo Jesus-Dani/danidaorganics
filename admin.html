@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Danida Organics</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="admin-body">
+
+<!-- ================= Login screen ================= -->
+<div class="admin-login-wrap" id="admin-login-screen">
+  <div class="admin-login-card">
+    <span class="wordmark">Danida Organics</span>
+    <form id="admin-login-form">
+      <div class="field">
+        <label for="admin-password" class="sr-only">Password</label>
+        <input type="password" id="admin-password" placeholder="Password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-accent btn-block" id="admin-login-submit">Log in</button>
+      <p class="admin-login-error" id="admin-login-error" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ================= Admin shell ================= -->
+<div id="admin-shell" hidden>
+  <header class="admin-header">
+    <span class="admin-wordmark">Danida Organics — Admin</span>
+    <button type="button" class="btn-text" id="logout-btn">Log out</button>
+  </header>
+
+  <div class="admin-shell">
+
+    <div id="draft-banner" hidden></div>
+
+    <div class="admin-toolbar">
+      <div class="admin-tabs" role="tablist">
+        <button type="button" class="btn btn-outline" data-tab="products" role="tab" aria-selected="true">Products</button>
+        <button type="button" class="btn btn-outline" data-tab="categories" role="tab" aria-selected="false">Categories</button>
+        <button type="button" class="btn btn-outline" data-tab="goals" role="tab" aria-selected="false">Health Goals</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button type="button" class="btn btn-outline" id="export-btn">Export backup</button>
+        <button type="button" class="btn btn-accent" id="add-product-btn">Add product</button>
+      </div>
+    </div>
+
+    <div id="save-status" role="status" aria-live="polite" style="min-height:20px;font-size:13px;color:var(--ink-muted);"></div>
+
+    <section id="panel-products" data-panel="products">
+      <table class="admin-table" id="products-table">
+        <thead>
+          <tr><th>Order</th><th>Name</th><th>Categories</th><th>From</th><th>Stock</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="products-tbody"></tbody>
+      </table>
+    </section>
+
+    <section id="panel-categories" data-panel="categories" hidden>
+      <div class="admin-toolbar">
+        <div class="field" style="flex:1;margin-bottom:0;">
+          <label for="new-category-input" class="sr-only">New category</label>
+          <input type="text" id="new-category-input" placeholder="New category name">
+        </div>
+        <button type="button" class="btn btn-accent" id="add-category-btn">Add</button>
+      </div>
+      <table class="admin-table" id="categories-table">
+        <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
+        <tbody id="categories-tbody"></tbody>
+      </table>
+    </section>
+
+    <section id="panel-goals" data-panel="goals" hidden>
+      <div class="admin-toolbar">
+        <div class="field" style="flex:1;margin-bottom:0;">
+          <label for="new-goal-input" class="sr-only">New health goal</label>
+          <input type="text" id="new-goal-input" placeholder="New health goal name">
+        </div>
+        <button type="button" class="btn btn-accent" id="add-goal-btn">Add</button>
+      </div>
+      <table class="admin-table" id="goals-table">
+        <thead><tr><th>Name</th><th>Used by</th><th>Actions</th></tr></thead>
+        <tbody id="goals-tbody"></tbody>
+      </table>
+    </section>
+
+    <p class="admin-footer-note" id="catalogue-size-indicator"></p>
+  </div>
+</div>
+
+<!-- ================= Product form dialog ================= -->
+<div class="confirm-dialog" id="product-form-dialog" role="dialog" aria-modal="true" aria-labelledby="product-form-title" style="align-items:flex-start;">
+  <div class="confirm-dialog-scrim" data-close-product-form></div>
+  <div class="confirm-dialog-card" style="max-width:640px;max-height:90vh;overflow-y:auto;margin:20px auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 id="product-form-title" style="font-size:17px;">Add product</h2>
+      <button type="button" class="btn-icon" data-close-product-form aria-label="Close">✕</button>
+    </div>
+    <form id="product-form"></form>
+  </div>
+</div>
+
+<!-- ================= Generic confirm dialog ================= -->
+<div class="confirm-dialog" id="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirm-dialog-title">
+  <div class="confirm-dialog-scrim"></div>
+  <div class="confirm-dialog-card">
+    <h2 id="confirm-dialog-title" style="font-size:17px;">Are you sure?</h2>
+    <p id="confirm-dialog-body" style="color:var(--ink-muted);margin-top:8px;"></p>
+    <div class="confirm-dialog-actions">
+      <button type="button" class="btn btn-outline" id="confirm-dialog-cancel">Cancel</button>
+      <button type="button" class="btn btn-ink" id="confirm-dialog-confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/data/seed.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>
