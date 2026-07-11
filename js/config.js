@@ -25,7 +25,9 @@ window.DANIDA_CONFIG = {
 
   // "Shop by category" is a curated homepage shortcut (PRD §7.3), not every
   // category — pick a handful here. Must match names in the bin's categories list.
-  homepageCategoryCards: ["Culinary Spices", "Ayurvedic Herbs", "Essential Oils", "Teas", "Chinese Herbs"],
+  // A "More" card is appended automatically, opening a scrollable list of
+  // every other category not featured here.
+  homepageCategoryCards: ["Culinary Spices", "Ayurvedic Herbs", "Essential Oils"],
 
   // Founder-curated testimonials (PRD §7.11). Real quotes only — leave empty
   // (or under 2 entries) to show the "more stories coming soon" placeholder

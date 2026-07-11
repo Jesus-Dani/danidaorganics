@@ -237,26 +237,67 @@
 
   function renderCategoryCards() {
     const wrap = document.getElementById("category-cards");
-    const cards = config.homepageCategoryCards.filter((c) => state.bin.categories.includes(c));
-    wrap.innerHTML = cards
-      .map(
-        (cat) => `
+    const featured = config.homepageCategoryCards.filter((c) => state.bin.categories.includes(c));
+    const rest = state.bin.categories.filter((c) => !featured.includes(c));
+
+    wrap.innerHTML =
+      featured
+        .map(
+          (cat) => `
       <button type="button" class="category-card" data-category-card="${escapeHtml(cat)}">
         <span class="category-card-icon" aria-hidden="true">🌿</span>
         <span class="category-card-label">${escapeHtml(cat)}</span>
       </button>`
-      )
-      .join("");
+        )
+        .join("") +
+      (rest.length > 0
+        ? `
+      <button type="button" class="category-card" id="more-categories-card">
+        <span class="category-card-icon" aria-hidden="true">＋</span>
+        <span class="category-card-label">More</span>
+      </button>`
+        : "");
 
     wrap.querySelectorAll("[data-category-card]").forEach((btn) => {
+      btn.addEventListener("click", () => selectCategoryAndScroll(btn.dataset.categoryCard));
+    });
+
+    const moreBtn = document.getElementById("more-categories-card");
+    if (moreBtn) moreBtn.addEventListener("click", () => openMoreCategoriesModal(rest));
+  }
+
+  function selectCategoryAndScroll(category) {
+    state.filters.category = category;
+    syncFilterControls();
+    applyFiltersAndRender();
+    pushFilterState();
+    document.getElementById("finder").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function openMoreCategoriesModal(categories) {
+    document.getElementById("content-modal-title").textContent = "All categories";
+    const body = document.getElementById("content-modal-body");
+    body.innerHTML = `
+      <div class="category-list-scroll">
+        ${categories
+          .map(
+            (cat) => `
+          <button type="button" class="category-card category-list-item" data-more-category="${escapeHtml(cat)}">
+            <span class="category-card-icon" aria-hidden="true">🌿</span>
+            <span class="category-card-label">${escapeHtml(cat)}</span>
+          </button>`
+          )
+          .join("")}
+      </div>`;
+    body.querySelectorAll("[data-more-category]").forEach((btn) => {
       btn.addEventListener("click", () => {
-        state.filters.category = btn.dataset.categoryCard;
-        syncFilterControls();
-        applyFiltersAndRender();
-        pushFilterState();
-        document.getElementById("finder").scrollIntoView({ behavior: "smooth", block: "start" });
+        closeContentModal();
+        selectCategoryAndScroll(btn.dataset.moreCategory);
       });
     });
+    document.getElementById("content-modal").setAttribute("open", "");
+    document.body.style.overflow = "hidden";
+    document.getElementById("content-modal-close").focus();
   }
 
   // ---------------------------------------------------------------------
