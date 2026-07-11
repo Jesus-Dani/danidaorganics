@@ -391,6 +391,13 @@ section { padding: 48px 0; }
 .search-input-wrap {
   position: relative;
   flex: 1;
+  min-width: 0;
+}
+
+.finder-row .select-input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
 }
 
 .search-input-wrap svg {

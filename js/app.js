@@ -305,17 +305,10 @@
   // ---------------------------------------------------------------------
 
   function populateFilterControls() {
-    const catOptions = state.bin.categories
-      .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`)
-      .join("");
     const goalOptions = state.bin.healthGoals
       .map((g) => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`)
       .join("");
 
-    ["category-select", "sheet-category-select"].forEach((id) => {
-      const el = document.getElementById(id);
-      el.innerHTML = `<option value="">All categories</option>${catOptions}`;
-    });
     ["goal-select", "sheet-goal-select"].forEach((id) => {
       const el = document.getElementById(id);
       el.innerHTML = `<option value="">All health goals</option>${goalOptions}`;
@@ -327,8 +320,6 @@
   function syncFilterControls() {
     document.getElementById("search-input").value = state.filters.search;
     document.getElementById("sheet-search-input").value = state.filters.search;
-    document.getElementById("category-select").value = state.filters.category;
-    document.getElementById("sheet-category-select").value = state.filters.category;
     document.getElementById("goal-select").value = state.filters.goal;
     document.getElementById("sheet-goal-select").value = state.filters.goal;
 
@@ -991,15 +982,6 @@
 
     ["search-input", "sheet-search-input"].forEach((id) => {
       document.getElementById(id).addEventListener("input", (e) => debouncedSearch(e.target.value));
-    });
-
-    ["category-select", "sheet-category-select"].forEach((id) => {
-      document.getElementById(id).addEventListener("change", (e) => {
-        state.filters.category = e.target.value;
-        syncFilterControls();
-        applyFiltersAndRender();
-        pushFilterState();
-      });
     });
 
     ["goal-select", "sheet-goal-select"].forEach((id) => {
