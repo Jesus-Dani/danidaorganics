@@ -309,28 +309,14 @@
       .map((g) => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`)
       .join("");
 
-    ["goal-select", "sheet-goal-select"].forEach((id) => {
-      const el = document.getElementById(id);
-      el.innerHTML = `<option value="">All health goals</option>${goalOptions}`;
-    });
+    document.getElementById("goal-select").innerHTML = `<option value="">All health goals</option>${goalOptions}`;
 
     syncFilterControls();
   }
 
   function syncFilterControls() {
     document.getElementById("search-input").value = state.filters.search;
-    document.getElementById("sheet-search-input").value = state.filters.search;
     document.getElementById("goal-select").value = state.filters.goal;
-    document.getElementById("sheet-goal-select").value = state.filters.goal;
-
-    const activeCount = (state.filters.category ? 1 : 0) + (state.filters.goal ? 1 : 0) + (state.filters.search ? 1 : 0);
-    const badge = document.getElementById("active-count-badge");
-    if (activeCount > 0) {
-      badge.hidden = false;
-      badge.textContent = String(activeCount);
-    } else {
-      badge.hidden = true;
-    }
   }
 
   function getFilteredProducts() {
@@ -956,8 +942,6 @@
           if (window.DanidaRouter) window.DanidaRouter.closeProduct();
         } else if (document.getElementById("cart-overlay").hasAttribute("open")) {
           closeCart();
-        } else if (document.getElementById("filter-sheet").hasAttribute("open")) {
-          closeFilterSheet();
         } else if (document.getElementById("content-modal").hasAttribute("open")) {
           closeContentModal();
         }
@@ -967,7 +951,6 @@
         const openPanel = [
           ["quickview-overlay", ".quickview-panel"],
           ["cart-overlay", ".cart-panel"],
-          ["filter-sheet", ".filter-sheet-panel"],
           ["content-modal", ".content-modal-panel"]
         ].find(([overlayId]) => document.getElementById(overlayId).hasAttribute("open"));
         if (openPanel) trapFocus(document.querySelector(openPanel[1]), e);
@@ -980,21 +963,14 @@
       applyFiltersAndRender();
     }, 250);
 
-    ["search-input", "sheet-search-input"].forEach((id) => {
-      document.getElementById(id).addEventListener("input", (e) => debouncedSearch(e.target.value));
-    });
+    document.getElementById("search-input").addEventListener("input", (e) => debouncedSearch(e.target.value));
 
-    ["goal-select", "sheet-goal-select"].forEach((id) => {
-      document.getElementById(id).addEventListener("change", (e) => {
-        state.filters.goal = e.target.value;
-        syncFilterControls();
-        applyFiltersAndRender();
-        pushFilterState();
-      });
+    document.getElementById("goal-select").addEventListener("change", (e) => {
+      state.filters.goal = e.target.value;
+      syncFilterControls();
+      applyFiltersAndRender();
+      pushFilterState();
     });
-
-    document.getElementById("filters-btn").addEventListener("click", openFilterSheet);
-    document.querySelectorAll("[data-close-filter-sheet]").forEach((el) => el.addEventListener("click", closeFilterSheet));
 
     document.getElementById("load-more-btn").addEventListener("click", () => {
       state.page += 1;
@@ -1059,15 +1035,6 @@
         toggle.focus();
       }
     });
-  }
-
-  function openFilterSheet() {
-    document.getElementById("filter-sheet").setAttribute("open", "");
-    document.body.style.overflow = "hidden";
-  }
-  function closeFilterSheet() {
-    document.getElementById("filter-sheet").removeAttribute("open");
-    document.body.style.overflow = "";
   }
 
   // ---------------------------------------------------------------------

@@ -94,11 +94,6 @@
         <select id="goal-select" class="select-input">
           <option value="">All health goals</option>
         </select>
-
-        <button type="button" class="btn btn-outline filters-btn" id="filters-btn" aria-haspopup="dialog">
-          Filters
-          <span class="active-count-badge" id="active-count-badge" hidden>0</span>
-        </button>
       </div>
 
       <div class="active-filters" id="active-filters" aria-live="polite"></div>
@@ -127,26 +122,6 @@
     </p>
   </div>
 </footer>
-
-<!-- ================= Filter sheet (mobile) ================= -->
-<div class="filter-sheet" id="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="filter-sheet-title">
-  <div class="scrim" data-close-filter-sheet></div>
-  <div class="filter-sheet-panel">
-    <div class="filter-sheet-header">
-      <h2 id="filter-sheet-title" style="font-size:17px;">Filters</h2>
-      <button class="btn-icon" data-close-filter-sheet aria-label="Close filters">✕</button>
-    </div>
-    <div class="field">
-      <label for="sheet-search-input">Search products</label>
-      <input type="text" id="sheet-search-input" class="search-input" placeholder="Search products" autocomplete="off">
-    </div>
-    <div class="field">
-      <label for="sheet-goal-select">Health goal</label>
-      <select id="sheet-goal-select" class="select-input"><option value="">All health goals</option></select>
-    </div>
-    <button type="button" class="btn btn-accent btn-block" data-close-filter-sheet>Show results</button>
-  </div>
-</div>
 
 <!-- ================= Quick-view overlay ================= -->
 <div class="quickview-overlay" id="quickview-overlay" role="dialog" aria-modal="true" aria-labelledby="qv-name">
