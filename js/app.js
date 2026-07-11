@@ -764,40 +764,134 @@
   }
 
   // ---------------------------------------------------------------------
-  // Testimonials
+  // Content modal (About / FAQ / Testimonials / Freshness / Contact)
+  //
+  // These sections used to live inline on the homepage; they're now opened
+  // on demand from the header menu so the homepage stays to Hero + Shop.
   // ---------------------------------------------------------------------
 
-  function renderTestimonials() {
-    const wrap = document.getElementById("testimonials-grid");
-    const quotes = config.testimonials || [];
-    if (quotes.length >= 2) {
-      wrap.innerHTML = quotes
-        .map(
-          (t) => `
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"${escapeHtml(t.quote)}"</p>
-          <p class="testimonial-name">— ${escapeHtml(t.name)}</p>
-        </div>`
-        )
-        .join("");
-    } else {
-      wrap.innerHTML = `<div class="testimonial-card testimonial-placeholder">More stories coming soon.</div>`;
+  const FAQ_ITEMS = [
+    {
+      q: "How should I store what I order?",
+      a: "Most powders and cut herbs keep best in an airtight container, away from direct light and heat. Whole roots, barks and seeds generally last longer than powdered forms — grind or use powders sooner rather than later for the best flavour and potency."
+    },
+    {
+      q: "Are these products food-grade or for wellness use?",
+      a: "It varies by product — some items in our range are culinary (spices, teas), others are traditionally used for wellness (Ayurvedic, Chinese and Western herbs). Each product's description notes its traditional or common use. If you're unsure how a specific item is meant to be used, ask us on WhatsApp before ordering."
+    },
+    {
+      q: "How does ordering on WhatsApp work?",
+      a: 'Add items to your cart, then tap "Order on WhatsApp." It opens a pre-filled message listing everything in your cart — form, weight, quantity and total — straight to our WhatsApp. We\'ll confirm availability, delivery and payment with you there.'
+    },
+    {
+      q: "Do you deliver, and how much does it cost?",
+      a: "Yes — delivery is arranged directly over WhatsApp once we know your location, since cost depends on where you are. We'll confirm the delivery fee and timeline before your order is finalised."
     }
+  ];
+
+  const CONTENT_SECTIONS = {
+    about: {
+      title: "Hello, and welcome",
+      html: () => `
+        <div class="about-us-inner">
+          <p>We're so glad you're here. At Danida Organics, we believe that what you bring into your kitchen and your daily rituals shapes how you feel, move, and carry yourself through the world — and that healthy, graceful living rarely needs anything complicated.</p>
+          <p>For generations, herbal traditions across the world — Ayurvedic, Chinese, West African and beyond — have leaned on roots, barks, seeds, and leaves as everyday companions, not trends. A warm tea to wind down with. A spice that turns a simple meal into something nourishing. A root passed down from a grandmother who swore by it.</p>
+          <p>We don't farm these herbs ourselves — we curate them. We spend our time seeking out quality, consistency, and trusted suppliers, so that everything in our catalogue arrives the way it should: fresh, honestly described, and worth your time. Healthy living, to us, starts with what's simple, well-sourced, and time-tested.</p>
+          <p>Take your time exploring — and if you're ever unsure what something is traditionally used for, just ask us on WhatsApp. We're always happy to talk herbs.</p>
+        </div>`
+    },
+    faq: {
+      title: "Frequently asked questions",
+      html: () => `
+        <div id="modal-faq-list">
+          ${FAQ_ITEMS.map(
+            (item) => `
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                ${escapeHtml(item.q)}
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="faq-answer">${escapeHtml(item.a)}</div>
+            </div>`
+          ).join("")}
+        </div>`,
+      afterRender: (body) => {
+        body.querySelectorAll(".faq-item").forEach((item) => {
+          const btn = item.querySelector(".faq-question");
+          btn.addEventListener("click", () => {
+            const isOpen = item.hasAttribute("open");
+            item.toggleAttribute("open", !isOpen);
+            btn.setAttribute("aria-expanded", String(!isOpen));
+          });
+        });
+      }
+    },
+    testimonials: {
+      title: "What people are saying",
+      html: () => {
+        const quotes = config.testimonials || [];
+        if (quotes.length >= 2) {
+          return `<div class="testimonials-grid">${quotes
+            .map(
+              (t) => `
+            <div class="testimonial-card">
+              <p class="testimonial-quote">"${escapeHtml(t.quote)}"</p>
+              <p class="testimonial-name">— ${escapeHtml(t.name)}</p>
+            </div>`
+            )
+            .join("")}</div>`;
+        }
+        return `<div class="testimonials-grid"><div class="testimonial-card testimonial-placeholder">More stories coming soon.</div></div>`;
+      }
+    },
+    freshness: {
+      title: "Freshness, storage & delivery",
+      html: () => `
+        <div class="freshness-grid">
+          <div class="freshness-item">
+            <h3>Powders &amp; ground spices</h3>
+            <p>Store airtight, away from light and heat, and use within a few months for the best flavour.</p>
+          </div>
+          <div class="freshness-item">
+            <h3>Whole roots, barks &amp; seeds</h3>
+            <p>Keep in a cool, dry place. Whole forms generally hold their potency longer than powdered ones.</p>
+          </div>
+          <div class="freshness-item">
+            <h3>Delivery</h3>
+            <p>Every order is confirmed and arranged over WhatsApp, with delivery cost and timing agreed before checkout.</p>
+          </div>
+        </div>`
+    },
+    contact: {
+      title: "Contact us",
+      html: () => `
+        <p class="contact-intro">Questions about a herb, an order, or anything else? We'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/${config.whatsapp.number}" class="btn btn-ink" target="_blank" rel="noopener">Message us on WhatsApp</a>
+          <a href="${config.instagram.url}" class="btn btn-outline" target="_blank" rel="noopener">Follow on Instagram</a>
+        </div>
+        <p class="contact-note">We typically reply within a few hours during business days.</p>`
+    }
+  };
+
+  function openContentModal(key) {
+    const section = CONTENT_SECTIONS[key];
+    if (!section) return;
+    document.getElementById("content-modal-title").textContent = section.title;
+    const body = document.getElementById("content-modal-body");
+    body.innerHTML = section.html();
+    if (section.afterRender) section.afterRender(body);
+    document.getElementById("content-modal").setAttribute("open", "");
+    document.body.style.overflow = "hidden";
+    document.getElementById("content-modal-close").focus();
   }
 
-  // ---------------------------------------------------------------------
-  // FAQ accordion
-  // ---------------------------------------------------------------------
-
-  function wireFaq() {
-    document.querySelectorAll(".faq-item").forEach((item) => {
-      const btn = item.querySelector(".faq-question");
-      btn.addEventListener("click", () => {
-        const isOpen = item.hasAttribute("open");
-        item.toggleAttribute("open", !isOpen);
-        btn.setAttribute("aria-expanded", String(!isOpen));
-      });
-    });
+  function closeContentModal() {
+    const modal = document.getElementById("content-modal");
+    const wasOpen = modal.hasAttribute("open");
+    modal.removeAttribute("open");
+    document.body.style.overflow = "";
+    if (wasOpen) document.getElementById("menu-toggle").focus();
   }
 
   // ---------------------------------------------------------------------
@@ -832,6 +926,8 @@
           closeCart();
         } else if (document.getElementById("filter-sheet").hasAttribute("open")) {
           closeFilterSheet();
+        } else if (document.getElementById("content-modal").hasAttribute("open")) {
+          closeContentModal();
         }
         return;
       }
@@ -839,7 +935,8 @@
         const openPanel = [
           ["quickview-overlay", ".quickview-panel"],
           ["cart-overlay", ".cart-panel"],
-          ["filter-sheet", ".filter-sheet-panel"]
+          ["filter-sheet", ".filter-sheet-panel"],
+          ["content-modal", ".content-modal-panel"]
         ].find(([overlayId]) => document.getElementById(overlayId).hasAttribute("open"));
         if (openPanel) trapFocus(document.querySelector(openPanel[1]), e);
       }
@@ -888,10 +985,9 @@
 
     const waLink = document.getElementById("footer-whatsapp-link");
     waLink.href = `https://wa.me/${config.whatsapp.number}`;
-    const contactWaLink = document.getElementById("contact-whatsapp-link");
-    if (contactWaLink) contactWaLink.href = `https://wa.me/${config.whatsapp.number}`;
 
     wireMainMenu();
+    document.querySelectorAll("[data-close-content-modal]").forEach((el) => el.addEventListener("click", closeContentModal));
   }
 
   function wireMainMenu() {
@@ -914,12 +1010,20 @@
       else closeMenu();
     });
 
-    menu.querySelectorAll("[data-menu-link]").forEach((link) => {
+    menu.querySelectorAll("[data-scroll-link]").forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
         closeMenu();
         const target = document.querySelector(link.getAttribute("href"));
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    menu.querySelectorAll("[data-modal-link]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+        openContentModal(link.dataset.modalLink);
       });
     });
 
@@ -949,8 +1053,6 @@
 
   function init() {
     wireGlobalEvents();
-    wireFaq();
-    renderTestimonials();
     updateCartCount();
     loadBin();
   }

@@ -28,9 +28,12 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <nav class="main-menu" id="main-menu" aria-label="Main menu" hidden>
-          <a href="#finder" data-menu-link>Shop</a>
-          <a href="#about" data-menu-link>About Us</a>
-          <a href="#contact" data-menu-link>Contact Us</a>
+          <a href="#finder" data-scroll-link>Shop</a>
+          <a href="#" data-modal-link="about">About Us</a>
+          <a href="#" data-modal-link="faq">FAQ</a>
+          <a href="#" data-modal-link="testimonials">Testimonials</a>
+          <a href="#" data-modal-link="freshness">Freshness &amp; Delivery</a>
+          <a href="#" data-modal-link="contact">Contact Us</a>
         </nav>
       </div>
       <button class="btn-icon" id="search-toggle" aria-label="Search products">
@@ -113,101 +116,6 @@
     </div>
   </section>
 
-  <!-- ================= About Us ================= -->
-  <section class="about-us" id="about" aria-labelledby="about-title">
-    <div class="container about-us-inner">
-      <h2 class="section-title" id="about-title">Hello, and welcome</h2>
-      <p>We're so glad you're here. At Danida Organics, we believe that what you bring into your kitchen and your daily rituals shapes how you feel, move, and carry yourself through the world — and that healthy, graceful living rarely needs anything complicated.</p>
-      <p>For generations, herbal traditions across the world — Ayurvedic, Chinese, West African and beyond — have leaned on roots, barks, seeds, and leaves as everyday companions, not trends. A warm tea to wind down with. A spice that turns a simple meal into something nourishing. A root passed down from a grandmother who swore by it.</p>
-      <p>We don't farm these herbs ourselves — we curate them. We spend our time seeking out quality, consistency, and trusted suppliers, so that everything in our catalogue arrives the way it should: fresh, honestly described, and worth your time. Healthy living, to us, starts with what's simple, well-sourced, and time-tested.</p>
-      <p>Take your time exploring — and if you're ever unsure what something is traditionally used for, just ask us on WhatsApp. We're always happy to talk herbs.</p>
-    </div>
-  </section>
-
-  <!-- ================= Testimonials ================= -->
-  <section class="testimonials" aria-labelledby="testimonials-title">
-    <div class="container">
-      <h2 class="section-title" id="testimonials-title">What people are saying</h2>
-      <div class="testimonials-grid" id="testimonials-grid"></div>
-    </div>
-  </section>
-
-  <!-- ================= FAQ ================= -->
-  <section class="faq" aria-labelledby="faq-title">
-    <div class="container">
-      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
-      <div id="faq-list">
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            How should I store what I order?
-            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">Most powders and cut herbs keep best in an airtight container, away from direct light and heat. Whole roots, barks and seeds generally last longer than powdered forms — grind or use powders sooner rather than later for the best flavour and potency.</div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            Are these products food-grade or for wellness use?
-            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">It varies by product — some items in our range are culinary (spices, teas), others are traditionally used for wellness (Ayurvedic, Chinese and Western herbs). Each product's description notes its traditional or common use. If you're unsure how a specific item is meant to be used, ask us on WhatsApp before ordering.</div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            How does ordering on WhatsApp work?
-            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">Add items to your cart, then tap "Order on WhatsApp." It opens a pre-filled message listing everything in your cart — form, weight, quantity and total — straight to our WhatsApp. We'll confirm availability, delivery and payment with you there.</div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            Do you deliver, and how much does it cost?
-            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">Yes — delivery is arranged directly over WhatsApp once we know your location, since cost depends on where you are. We'll confirm the delivery fee and timeline before your order is finalised.</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Freshness, storage & delivery ================= -->
-  <section class="freshness" aria-labelledby="freshness-title">
-    <div class="container">
-      <h2 class="section-title" id="freshness-title">Freshness, storage &amp; delivery</h2>
-      <div class="freshness-grid">
-        <div class="freshness-item">
-          <h3>Powders &amp; ground spices</h3>
-          <p>Store airtight, away from light and heat, and use within a few months for the best flavour.</p>
-        </div>
-        <div class="freshness-item">
-          <h3>Whole roots, barks &amp; seeds</h3>
-          <p>Keep in a cool, dry place. Whole forms generally hold their potency longer than powdered ones.</p>
-        </div>
-        <div class="freshness-item">
-          <h3>Delivery</h3>
-          <p>Every order is confirmed and arranged over WhatsApp, with delivery cost and timing agreed before checkout.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= Contact Us ================= -->
-  <section class="contact-us" id="contact" aria-labelledby="contact-title">
-    <div class="container">
-      <h2 class="section-title" id="contact-title">Contact us</h2>
-      <p class="contact-intro">Questions about a herb, an order, or anything else? We'd love to hear from you.</p>
-      <div class="contact-links">
-        <a href="#" id="contact-whatsapp-link" class="btn btn-ink" target="_blank" rel="noopener">Message us on WhatsApp</a>
-        <a href="https://www.instagram.com/danidaorganics_herbs" class="btn btn-outline" target="_blank" rel="noopener">Follow on Instagram</a>
-      </div>
-      <p class="contact-note">We typically reply within a few hours during business days.</p>
-    </div>
-  </section>
-
 </main>
 
 <!-- ================= Footer ================= -->
@@ -277,6 +185,18 @@
       <button type="button" class="btn btn-ink btn-block" id="whatsapp-checkout-btn" disabled>Order on WhatsApp</button>
       <button type="button" class="btn btn-outline btn-block" id="cart-continue-shopping-btn" style="margin-top:8px;">Continue shopping</button>
     </div>
+  </div>
+</div>
+
+<!-- ================= Content modal (About/FAQ/Testimonials/Freshness/Contact) ================= -->
+<div class="content-modal" id="content-modal" role="dialog" aria-modal="true" aria-labelledby="content-modal-title">
+  <div class="content-modal-scrim" data-close-content-modal></div>
+  <div class="content-modal-panel">
+    <div class="content-modal-header">
+      <h2 id="content-modal-title"></h2>
+      <button id="content-modal-close" class="btn-icon" data-close-content-modal aria-label="Close">✕</button>
+    </div>
+    <div class="content-modal-body" id="content-modal-body"></div>
   </div>
 </div>
 
