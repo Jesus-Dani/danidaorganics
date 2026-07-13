@@ -51,7 +51,15 @@
    author-normal always wins over user-agent-normal in the cascade. */
 [hidden] { display: none !important; }
 
-html { -webkit-text-size-adjust: 100%; }
+/* Prevent mobile browsers (esp. Samsung Internet, some Chrome-on-Android
+   builds) from auto-inflating font sizes on narrow viewports — that "font
+   boosting" heuristic ignores our layout and wraps things like the header
+   wordmark or a short button label mid-word. */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
@@ -167,8 +175,10 @@ section { padding: 48px 0; }
 
 .btn-text {
   background: transparent;
+  border: none;
   color: var(--ink-muted);
   padding: 8px 10px;
+  white-space: nowrap;
 }
 .btn-text:hover:not(:disabled) { color: var(--ink); }
 
