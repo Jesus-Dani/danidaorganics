@@ -387,15 +387,15 @@
       .map(
         (p, i) => `
       <tr>
-        <td>
+        <td data-label="Order">
           <button type="button" class="btn-icon" data-reorder="${i}:-1" aria-label="Move ${escapeHtml(p.name)} up" ${i === 0 ? "disabled" : ""}>↑</button>
           <button type="button" class="btn-icon" data-reorder="${i}:1" aria-label="Move ${escapeHtml(p.name)} down" ${i === sorted.length - 1 ? "disabled" : ""}>↓</button>
         </td>
-        <td>${escapeHtml(p.name)}</td>
-        <td>${(p.categories || []).map(escapeHtml).join(", ")}</td>
-        <td>${minPrice(p) !== null ? formatNaira(minPrice(p)) : "—"}</td>
-        <td>${p.inStock ? "In stock" : "Sold out"}</td>
-        <td class="admin-row-actions">
+        <td data-label="Name">${escapeHtml(p.name)}</td>
+        <td data-label="Categories">${(p.categories || []).map(escapeHtml).join(", ")}</td>
+        <td data-label="From">${minPrice(p) !== null ? formatNaira(minPrice(p)) : "—"}</td>
+        <td data-label="Stock">${p.inStock ? "In stock" : "Sold out"}</td>
+        <td class="admin-row-actions" data-label="Actions">
           <button type="button" class="btn-text" data-edit-product="${escapeHtml(p.id)}">Edit</button>
           <button type="button" class="btn-text" data-duplicate-product="${escapeHtml(p.id)}">Duplicate</button>
           <button type="button" class="btn-text" data-delete-product="${escapeHtml(p.id)}">Delete</button>
@@ -942,9 +942,9 @@
       .map((name) => {
         const count = state.bin.products.filter((p) => (kind === "categories" ? p.categories : p.healthGoals || []).includes(name)).length;
         return `<tr data-tag-row="${escapeHtml(name)}">
-        <td class="tag-name-cell">${escapeHtml(name)}</td>
-        <td>${count}</td>
-        <td class="admin-row-actions">
+        <td class="tag-name-cell" data-label="Name">${escapeHtml(name)}</td>
+        <td data-label="Used by">${count}</td>
+        <td class="admin-row-actions" data-label="Actions">
           <button type="button" class="btn-text" data-rename-tag="${escapeHtml(name)}">Rename</button>
           <button type="button" class="btn-text" data-delete-tag="${escapeHtml(name)}">Delete</button>
         </td>

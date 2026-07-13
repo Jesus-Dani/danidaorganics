@@ -1003,16 +1003,20 @@ img:not(.blur-up) {
 
 .toast {
   position: fixed;
-  bottom: 20px;
+  top: 76px;
   left: 50%;
   transform: translateX(-50%);
+  max-width: calc(100vw - 40px);
   background: var(--ink);
   color: #fff;
   padding: 12px 18px;
   border-radius: var(--radius-sm);
   font-size: var(--fs-13);
-  z-index: 100;
+  /* Below every overlay/dialog z-index (60-90) so it never overlaps open
+     modal content — it's still visible once nothing else is open. */
+  z-index: 55;
   display: none;
+  text-align: center;
 }
 .toast[data-visible="true"] { display: block; }
 
@@ -1168,6 +1172,40 @@ img:not(.blur-up) {
 .admin-row-actions {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Below this width, an actual table (even in a scroll container) is too
+   cramped to use comfortably — collapse each row into a stacked card. */
+@media (max-width: 480px) {
+  .table-scroll { overflow-x: visible; }
+  .admin-table { min-width: 0; }
+  .admin-table thead { display: none; }
+  .admin-table, .admin-table tbody, .admin-table tr, .admin-table td {
+    display: block;
+    width: 100%;
+  }
+  .admin-table tr {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    padding: 4px 12px;
+  }
+  .admin-table tr:last-child { margin-bottom: 0; }
+  .admin-table td {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+  }
+  .admin-table tr td:last-child { border-bottom: none; }
+  .admin-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    margin-bottom: 2px;
+  }
+  .admin-row-actions { padding-top: 2px; }
 }
 
 .admin-toolbar {
