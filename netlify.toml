@@ -26,3 +26,21 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# CSS/JS filenames never change between deploys (no build-step hashing), so
+# without this, browsers/CDNs can keep serving a stale copy indefinitely
+# after a fix ships. no-cache forces revalidation on every load instead.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
